@@ -1,5 +1,13 @@
 # KAUST-CS283-Course-Project
+
+# Introduction
 The course project of CS283 Deep Generative Modeling at KAUST. The modification of GENhance for thermostability and solubility co-optimization.
+
+The results of co-optimization is visualized below, where the joint property distribution of the generated data, where red represents the distribution of the generated sequences by the thermostability model, blue represents the distribution of the generated sequences by the solubility optimization model, and the yellow represents the distribution of the generated sequences by the co-optimization optimization model.
+<div align=center>
+    <img src="./ddG_solubility_cooptim.png"  width="450">
+    <div align=center> Figure 1. The co-optimizaiton visualization.</div>
+</div>
 
 # How to run the project
 To reproduce the results may takes up you much time at least two days as the pipline a little bit complex and can not be simplified. If you meet some raised errors, it is probably becuase of the worng path settings since there are many path parameters and it is easy to make mistakes. Each step uses the relevant paths or data from the previouse setp, please make sure the settings of each step are consistent, for example, the path of the model checkpoints in the training step and generation step.
