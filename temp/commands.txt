@@ -1,0 +1,109 @@
+# disk path
+cd /home/hew/storage/code/
+cd /home/hew/storage/storage/genhance/data/
+cd /home/hew/storage/storage/genhance/pretrained/
+cd /home/hew/storage/storage/genhance/ckpts/
+cd /home/hew/storage/storage/genhance/ckpts/congen2/generations
+cd /home/hew/storage/storage/genhance/ckpts/congen2/results
+cd /home/hew/storage/storage/genhance/ckpts/congen2/results/step_1000
+
+# scripts running path
+cd /home/hew/
+cd /home/hew/python/genhance
+cd /home/hew/python/genhance/output
+cd /home/hew/python/genhance/temp
+cd /home/hew/python/genhance/tensorboard
+cd /home/hew/python/genhance/foldx
+cd /home/hew/python/genhance/ACE2
+
+# conda virtual env
+conda activate python3.10
+conda activate genhance
+
+# check gpu
+nvidia-smi
+
+# run scriptsco
+sh /home/hew/python/genhance/ACE2/training_scripts/train_controlled_gen_continue.sh
+sh /home/hew/python/genhance/ACE2/training_scripts/train_controlled_gen_cooptim.sh
+sh /home/hew/python/genhance/ACE2/generation_scripts/generate_clspool_congen.sh
+
+nohup sh /home/hew/python/genhance/ACE2/generation_scripts/generate_clspool_congen.sh > /home/hew/run.log 2>&1 &
+nohup sh /home/hew/python/genhance/ACE2/training_scripts/train_controlled_gen_cooptim.sh > /home/hew/run.log 2>&1 &
+
+
+nohup sh /home/hew/python/genhance/ACE2/generation_scripts/generate_clspool_congen.sh > /home/hew/run_gen_[-50]_[2.0].log 2>&1 &
+nohup sh /home/hew/python/genhance/ACE2/generation_scripts/generate_clspool_congen.sh > /home/hew/run_gen_[-50]_[1.0].log 2>&1 &
+
+
+
+# common used commands
+cd /home/hew/storage/storage/genhance/ckpts/congen2/generations/
+sudo rm -rf /home/hew/storage/storage/genhance/ckpts/congen4/generations
+
+
+
+sudo cp /home/hew/python/genhance/data/train_new_all_data.pkl /home/hew/storage/storage/genhance/data/
+sudo cp /home/hew/python/genhance/data/train_new_tophalf_ddG.pkl /home/hew/storage/storage/genhance/data/
+sudo cp /home/hew/python/genhance/data/train_new_tophalf_solubility.pkl /home/hew/storage/storage/genhance/data/
+sudo cp /home/hew/python/genhance/data/train_new_tophalf_avg_rank.pkl /home/hew/storage/storage/genhance/data/
+
+
+
+sudo rm -rf step_2000 step_3000 step_4000 step_5000 step_6000 step_7000 step_8000 step_9000 step_11000 step_12000 step_13000 step_14000 step_15000 step_16000 step_17000 step_18000 step_19000 step_21000 step_22000 step_23000 step_24000 step_25000 step_26000 step_27000 step_28000 step_29000 step_31000 step_32000 step_33000 step_34000 step_35000 step_36000 step_37000 step_38000 step_39000 step_41000 step_42000 step_43000 step_44000 step_45000 step_46000 step_47000 step_48000 step_49000 step_51000 step_52000 step_53000 step_54000 step_55000 step_56000 step_57000 step_58000 step_59000
+
+sudo rm -rf step_61000 step_62000 step_63000 step_64000 step_65000 step_66000 step_67000 step_68000 step_69000 step_71000 step_72000 step_73000 step_74000 step_75000 step_76000 step_77000 step_78000 step_79000 step_81000 step_82000 step_83000 step_84000 step_85000 step_86000 step_87000 step_88000 step_89000  step_91000 step_92000 step_93000 step_94000 step_85000 step_86000 step_87000 step_88000 step_89000 91000 step_92000 step_93000 step_94000 step_95000 step_96000 step_97000 step_98000 step_99000  step_101000 step_102000 step_103000 step_104000
+
+
+[ibex-announce] Ibex Shutdown and Who is your PI?
+
+
+
+
+
+# foldx RepairPDB
+/home/hew/foldx/foldx5/foldx5 -c RepairPDB --pdb-dir=/home/hew/python/genhance/temp/ --pdb=6lzg.pdb --output-dir=/home/hew/python/genhance/output/
+
+# foldx BuildModel
+/home/hew/foldx/foldx5/foldx5 -c BuildModel --pdb-dir=/home/hew/python/genhance/temp/ --pdb=BM.pdb --mutant-file=/home/hew/python/genhance/temp/individual_list.txt --output-dir=/home/hew/foldx_output/
+/home/hew/foldx/foldx5/foldx5 -c BuildModel --pdb-dir=/home/hew/python/genhance/output/ --pdb=6lzg_Repair.pdb --mutant-file=/home/hew/python/genhance/temp/mutant_file.txt --output-dir=/home/hew/foldx_output/ --wildtype STIEEQAKTFLDKFNHEAEDLFYQSSLASWNYNTNITEENVQNMNNAGDKWSAFLKEQSTLAQMYPLQEIQNLTVKLQLQALQQNGSSVLSEDKSKRLNTILNTMSTIYSTGKVCNPDNPQECLLLEPGLNEIMANSLDYNERLWAWESWRSEVGKQLRPLYEEYVVLKNEMARANHYEDYGDYWRGDYEVNGVDGYDYSRGQLIEDVEHTFEEIKPLYEHLHAYVRAKLMNAYPSYISPIGCLPAHLLGDMWGRFWTNLYSLTVPFGQKPNIDVTDAMVDQAWDAQRIFKEAEKFFVSVGLPNMTQGFWENSMLTDPGNVQKAVCHPTAWDLGKGDFRILMCTKVTMDDFLTAHHEMGHIQYDMAYAAQPFLLRNGANEGFHEAVGEIMSLSAATPKHLKSIGLLSPDFQEDNETEINFLLKQALTIVGTLPFTYMLEKWRWMVFKGEIPKDQWMKKWWEMKREIVGVVEPVPHDETYCDPASLFHVSNDYSFIRYYTRTLYQFQFQEALCQAAKHEGPLHKCDISNSTEAGQKLFNMLRLGKSEPWTLALENVVGAKNMNVRPLLNYFEPLFTWLKDQNKNSFVGWSTDWSPYA
+/home/hew/foldx/foldx5/foldx5 -c BuildModel --numberOfRuns 5 --pdb-dir=/home/hew/python/genhance/output/ --pdb=6lzg_Repair.pdb --mutant-file=/home/hew/python/genhance/temp/individual_list.txt --output-dir=/home/hew/foldx_output/
+
+
+# test pytorch
+import torch
+torch.cuda.is_available()
+
+
+# 复制文件夹 cp -r source_dir target_dir
+cp -r /home/hew/python/ /scratch/hew/backup/
+cp -r /scratch/hew/backup/python/genhance /home/hew/python/
+
+# 清理磁盘
+sudo apt autoremove
+sudo apt autoclean
+sudo apt clean
+
+# 删除没有用的包
+conda clean -p
+# 删除tar打包
+conda clean -t
+# 删除无用的包和缓存
+conda clean --all
+# 清理/home/hew/下的./cache/文件夹
+
+
+# from transformers_custom import MT5ForConditionalGeneration 报错修复
+# pip install transformers -U or pip install -e '.[dev]'
+pip install sacremoses
+# packaging.version.InvalidVersion: Invalid version: '0.10.1,<0.11'
+pip install packaging==21.3
+
+
+
+
+
+
+
+
+

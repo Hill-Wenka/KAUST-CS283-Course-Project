@@ -1,0 +1,52 @@
+# stop VM machine 后restart在/home/hew/下的文件依然存在
+
+# 查看系统版本号
+lsb_release -a
+
+# 用官方给的脚本安装CUDA等gpu驱动
+curl https://raw.githubusercontent.com/GoogleCloudPlatform/compute-gpu-installation/main/linux/install_gpu_driver.py --output install_gpu_driver.py
+sudo python3 install_gpu_driver.py
+
+# 检查安装是否成功
+nvidia-smi
+
+# 安装wget
+sudo apt install wget
+
+# 更新软件源列表缓存
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt update
+
+# anaconda download and install (为了避免磁盘容量不足，安装在挂载的硬盘里，但是如果不是自定义的硬盘，在隔一段时间后会消失)
+# /dev/shm/ 只是临时文件夹，最好不用
+wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
+bash Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
+
+# set user anaconda path, or it may use the global anaconda
+source /home/hew/miniconda3/bin/activate
+
+# 查看磁盘容量
+df -h
+du -sh dir_name
+
+# create conda environment through yaml
+cd /home/hew/python/genhance/temp/
+conda env create -f genhance.yaml
+conda env create -f python310.yaml
+
+
+# 查看已有的文件系统
+sudo lsblk
+# 如果磁盘没有格式化，需要先格式化
+sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
+# 装载磁盘
+sudo mkdir -p /home/hew/storage
+sudo mount -o discard,defaults /dev/sdb /home/hew/storage
+# 添加读写权限
+sudo chmod a+w /home/hew/storage/
+
+# 备份
+sudo rm -rf /home/hew/storage/code/
+sudo cp -r /home/hew/python/genhance/ /home/hew/storage/code/
+sudo cp -r /home/hew/storage/ /home/hew/storage/storage/
