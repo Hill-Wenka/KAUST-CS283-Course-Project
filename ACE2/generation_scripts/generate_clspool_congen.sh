@@ -162,12 +162,12 @@ sudo /home/hew/miniconda3/envs/genhance/bin/python ./generate_sequences_congen.p
   --gen_batch_size=400 \
   --num_gen_samples_per_input=20 \
   --unique_gen \
-  --z_tar_edit_before_dec -30.0 1.0 \
+  --z_tar_edit_before_dec -40.0 1.0 \
   --temperature_init=1.0 \
   --temperature_multiple=1.001 \
   --input_data_dir=/home/hew/storage/storage/genhance/data \
   --gen_pretrained_dir=/home/hew/storage/storage/genhance/ckpts/congen10_new_ddG_solubility_6_layer/results/ \
-  --generation_output_dir=/home/hew/storage/storage/genhance/ckpts/congen10_new_ddG_solubility_6_layer/generations_[-30.0]_[1.0]_[1.0]/ \
+  --generation_output_dir=/home/hew/storage/storage/genhance/ckpts/congen10_new_ddG_solubility_6_layer/generations_[-40.0]_[1.0]_[1.0]/ \
   --prepend_output_name=congen10_new_ddG_solubility_6_layer \
   --property ddG_solubility \
   --cuda_device 0,1 \
