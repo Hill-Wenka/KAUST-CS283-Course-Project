@@ -1,7 +1,8 @@
 # KAUST-CS283-Course-Project
 The course project of CS283 Deep Generative Modeling at KAUST. The modification of GENhance for thermostability and solubility co-optimization.
 
-# How to run
+# How to run the project
+To reproduce the results may takes up you much time at least two days as the pipline a little bit complex and can not be simplified. If you meet some raised errors, it is probably becuase of the worng path settings since there are many path parameters and it is easy to make mistakes. Each step uses the relevant paths or data from the previouse setp, please make sure the settings of each step are consistent, for example, the path of the model checkpoints in the training step and generation step.
 
 ## Dependency
 1. The yaml file for the anaconda environment is stored on ```./genhance/temp/genhance.yaml```. Create the anaconda virtual encironemtn and install dependencies: ```conda env create -f ./genhance/temp/genhance.yaml```.
@@ -33,7 +34,8 @@ The course project of CS283 Deep Generative Modeling at KAUST. The modification 
 ## Evaluation
 1. The evaluation jupyter notebooks are stored in ```./genhance/ACE2/evaluation/```
 2. Open the corresponding jupyter notebooks, modify the relevant paths, for example, the excutable path of FoldX 5.0 and follow the instructions.
-
+3. It takes up approximately average 4 minitues (depedends on the number of mutations) for FoldX to compute the ddG value of one sequence.
+4. It takes up several minites to evaluate 1000 sequences using Protein-Sol.
 
 
 
